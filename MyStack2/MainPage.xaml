@@ -37,7 +37,7 @@
             <Button x:Name="Button12" Content="Pop(Str)" HorizontalAlignment="Left" Margin="167,13,0,12" Grid.Row="5" VerticalAlignment="Center" FontSize="24" Grid.Column="1" Width="146"/>
             <Button x:Name="Button13" Content="Que(Str)" HorizontalAlignment="Left" Margin="327,13,0,12" Grid.Row="5" VerticalAlignment="Center" FontSize="24" Grid.Column="1" Width="149"/>
             <Button x:Name="Button14" Content="Clear(Str)" HorizontalAlignment="Left" Margin="7,13,0,12" Grid.Row="5" VerticalAlignment="Center" FontSize="24" Grid.Column="2" Width="159"/>
-            <Button x:Name="Button14_Copy" Content="Reset" HorizontalAlignment="Right" Margin="0,13,7,12" Grid.Row="5" VerticalAlignment="Center" FontSize="24" Grid.Column="2" Width="159"/>
+            <Button x:Name="Button20" Content="Reset" HorizontalAlignment="Right" Margin="0,13,7,12" Grid.Row="5" VerticalAlignment="Center" FontSize="24" Grid.Column="2" Width="159"/>
         </Grid>
 
     </Grid>

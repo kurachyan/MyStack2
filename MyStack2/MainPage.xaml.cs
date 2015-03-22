@@ -22,6 +22,10 @@ namespace MyStack2
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        #region 共有領域
+        private List<int> buffer;
+        #endregion
+
         #region コンストラクタ
         public MainPage()
         {   // アプリケーション　コンストラクタ
@@ -29,31 +33,54 @@ namespace MyStack2
 
             // 初期表示をクリアする
             ClearResultTextBox();
-//			TextBox02.Text = "";
+
+            buffer = new List<int>();
         }
         #endregion
 
         #region ［Ｐｕｓｈ（Ｎｕｍｂｅｒ）］ボタン押下
         private void Button01_Click(object sender, RoutedEventArgs e)
         {   // [Push(Num)]ボタン押下
-            WriteLineResult(@"[Push (Number)]");
+//            WriteLineResult(@"[Push (Number)]");
+            int i;
 
+            i = int.Parse(TextBox01.Text);
+            buffer.Insert(0, i);            // 要素設定
+
+            StackView();
         }
         #endregion
 
         #region ［Ｐｏｐ（Ｎｕｍｂｅｒ）］ボタン押下
         private void Button02_Click(object sender, RoutedEventArgs e)
         {   // [Pop(Num)]ボタン押下
-            WriteLineResult(@"[Pop (Number)]");
+//            WriteLineResult(@"[Pop (Number)]");
+            int i;
 
+            i = buffer[0];              // 要素取り出し
+            buffer.RemoveAt(0);         // 要素情報削除
+            WriteLineResult("Pop Result : [{0}]", i);
+
+            StackView();
         }
         #endregion
 
         #region ［Ｑｕｅ（Ｎｕｍｂｅｒ）］ボタン押下
         private void Button03_Click(object sender, RoutedEventArgs e)
         {   // [Que(Num)]ボタン押下
-            WriteLineResult(@"[Que (Number)]");
+//            WriteLineResult(@"[Que (Number)]");
+            int i, j;
 
+            i = buffer.Count;           // 下限要素の取り出し
+            j = buffer[i - 1];
+            buffer.RemoveAt(i - 1);     // 下限要素の削除
+
+            i = int.Parse(TextBox01.Text);
+            buffer.Insert(0, i);            // 上限の要素設定
+
+            WriteLineResult("Que Result : [{0}]", j);
+
+            StackView();
         }
         #endregion
 
@@ -61,15 +88,23 @@ namespace MyStack2
         private void Button04_Click(object sender, RoutedEventArgs e)
         {   // [Clear(Num)]ボタン押下
             WriteLineResult(@"[Clear (Number)]");
+            buffer.Clear();
 
+            StackView();
         }
         #endregion
 
         #region ［Ｃｈｅｃｋ（Ｎｕｍｂｅｒ）］ボタン押下
         private void Button05_Click(object sender, RoutedEventArgs e)
         {   // [Check(Num)]ボタン押下
-            WriteLineResult(@"[Check (Number)]");
+//            WriteLineResult(@"[Check (Number)]");
+            int i, j;
 
+            i = int.Parse(TextBox01.Text);
+            j = buffer.IndexOf(i);            // 上限の要素設定
+
+            WriteLineResult(" Source : [{0}]", i);
+            WriteLineResult(" Result : [{0}]", j);
         }
         #endregion
 
@@ -120,6 +155,17 @@ namespace MyStack2
 
 //            TextBox02.Text = "";
 
+        }
+        #endregion
+
+        #region Stack View
+        private void StackView()
+        {
+            ListBox01.Items.Clear();
+            foreach (int j in buffer)
+            {
+                ListBox01.Items.Add(j);
+            }
         }
         #endregion
 

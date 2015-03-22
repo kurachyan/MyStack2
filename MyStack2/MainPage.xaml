@@ -29,15 +29,28 @@
             <TextBlock x:Name="TextBlock03" Grid.Column="2" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="Stack" FontSize="48" VerticalAlignment="Center"/>
             <ListBox x:Name="ListBox01" Grid.Column="2" HorizontalAlignment="Left" Height="348" Margin="10,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="480"/>
             <TextBox x:Name="TextBox01" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="3" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Height="348" Width="480"/>
-            <Button x:Name="Button01" Content="Push(Num)" Grid.Column="1" HorizontalAlignment="Left" Margin="0,11,0,14" Grid.Row="4" VerticalAlignment="Center" FontSize="24"/>
-            <Button x:Name="Button02" Content="Pop(Num)" HorizontalAlignment="Left" Margin="167,11,0,14" Grid.Row="4" VerticalAlignment="Center" FontSize="24" Grid.Column="1"/>
-            <Button x:Name="Button03" Content="Que(Num)" HorizontalAlignment="Left" Margin="327,11,0,14" Grid.Row="4" VerticalAlignment="Center" FontSize="24" Grid.Column="1"/>
-            <Button x:Name="Button04" Content="Clear(Num)" HorizontalAlignment="Left" Margin="7,11,0,14" Grid.Row="4" VerticalAlignment="Center" FontSize="24" Grid.Column="2"/>
-            <Button x:Name="Button11" Content="Push(Str)" Grid.Column="1" HorizontalAlignment="Left" Margin="0,13,0,12" Grid.Row="5" VerticalAlignment="Center" FontSize="24" RenderTransformOrigin="0.378,0.722" Width="156"/>
-            <Button x:Name="Button12" Content="Pop(Str)" HorizontalAlignment="Left" Margin="167,13,0,12" Grid.Row="5" VerticalAlignment="Center" FontSize="24" Grid.Column="1" Width="146"/>
-            <Button x:Name="Button13" Content="Que(Str)" HorizontalAlignment="Left" Margin="327,13,0,12" Grid.Row="5" VerticalAlignment="Center" FontSize="24" Grid.Column="1" Width="149"/>
-            <Button x:Name="Button14" Content="Clear(Str)" HorizontalAlignment="Left" Margin="7,13,0,12" Grid.Row="5" VerticalAlignment="Center" FontSize="24" Grid.Column="2" Width="159"/>
-            <Button x:Name="Button20" Content="Reset" HorizontalAlignment="Right" Margin="0,13,7,12" Grid.Row="5" VerticalAlignment="Center" FontSize="24" Grid.Column="2" Width="159"/>
+            <Button x:Name="Button01" Content="Push(Num)" Grid.Column="1" HorizontalAlignment="Left" Margin="0,11,0,14" Grid.Row="4" VerticalAlignment="Center" FontSize="24"
+                    Click="Button01_Click"/>
+            <Button x:Name="Button02" Content="Pop(Num)" HorizontalAlignment="Left" Margin="167,11,0,14" Grid.Row="4" VerticalAlignment="Center" FontSize="24" Grid.Column="1"
+                    Click="Button02_Click"/>
+            <Button x:Name="Button03" Content="Que(Num)" HorizontalAlignment="Left" Margin="327,11,0,14" Grid.Row="4" VerticalAlignment="Center" FontSize="24" Grid.Column="1"
+                    Click="Button03_Click"/>
+            <Button x:Name="Button04" Content="Clear(Num)" HorizontalAlignment="Left" Margin="7,11,0,14" Grid.Row="4" VerticalAlignment="Center" FontSize="24" Grid.Column="2"
+                    Click="Button04_Click"/>
+            <Button x:Name="Button05" Content="Check(Num)" HorizontalAlignment="Left" Margin="174,11,0,14" Grid.Row="4" VerticalAlignment="Center" FontSize="24" Grid.Column="2"
+                    Click="Button05_Click"/>
+            <Button x:Name="Button11" Content="Push(Str)" Grid.Column="1" HorizontalAlignment="Left" Margin="0,13,0,12" Grid.Row="5" VerticalAlignment="Center" FontSize="24" RenderTransformOrigin="0.378,0.722" Width="156"
+                    Click="Button11_Click"/>
+            <Button x:Name="Button12" Content="Pop(Str)" HorizontalAlignment="Left" Margin="167,13,0,12" Grid.Row="5" VerticalAlignment="Center" FontSize="24" Grid.Column="1" Width="146"
+                    Click="Button12_Click"/>
+            <Button x:Name="Button13" Content="Que(Str)" HorizontalAlignment="Left" Margin="327,13,0,12" Grid.Row="5" VerticalAlignment="Center" FontSize="24" Grid.Column="1" Width="149"
+                    Click="Button13_Click"/>
+            <Button x:Name="Button14" Content="Clear(Str)" HorizontalAlignment="Left" Margin="7,13,0,12" Grid.Row="5" VerticalAlignment="Center" FontSize="24" Grid.Column="2" Width="159"
+                    Click="Button14_Click"/>
+            <Button x:Name="Button15" Content="Check(Str)" HorizontalAlignment="Left" Margin="174,13,0,12" Grid.Row="5" VerticalAlignment="Center" FontSize="24" Grid.Column="2" Width="170"
+                    Click="Button15_Click"/>
+            <Button x:Name="Button20" Content="Reset" HorizontalAlignment="Right" Margin="0,13,-3,12" Grid.Row="5" VerticalAlignment="Center" FontSize="24" Grid.Column="2" Width="149"
+                    Click="Button20_Click"/>
         </Grid>
 
     </Grid>

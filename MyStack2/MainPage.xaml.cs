@@ -13,6 +13,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+using Stack;
+
 // 空白ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=234238 を参照してください
 
 namespace MyStack2
@@ -23,8 +25,9 @@ namespace MyStack2
     public sealed partial class MainPage : Page
     {
         #region 共有領域
-        private List<int> buffer;		// 数値用
-		private List<string> strbuf;	// 文字列用
+//      private List<int> buffer;		// 数値用
+//		private List<string> strbuf;	// 文字列用
+		private CS_Stack Stack;
         #endregion
 
         #region コンストラクタ
@@ -36,8 +39,9 @@ namespace MyStack2
             ClearResultTextBox();
 
 			// 共有領域を初期化する
-            buffer = new List<int>();
-			strbuf = new List<string>();
+//          buffer = new List<int>();
+//			strbuf = new List<string>();
+			Stack = new CS_Stack();
         }
         #endregion
 
@@ -48,7 +52,8 @@ namespace MyStack2
             int i;
 
             i = int.Parse(TextBox01.Text);
-            buffer.Insert(0, i);            // 要素設定
+			Stack.Push(i);
+//            buffer.Insert(0, i);            // 要素設定
 
             StackView();
         }
@@ -60,8 +65,9 @@ namespace MyStack2
 //            WriteLineResult(@"[Pop (Number)]");
             int i;
 
-            i = buffer[0];              // 要素取り出し
-            buffer.RemoveAt(0);         // 要素情報削除
+//            i = buffer[0];              // 要素取り出し
+//            buffer.RemoveAt(0);         // 要素情報削除
+			i = Stack.Pop();
             WriteLineResult("Pop Result : [{0}]", i);
 
             StackView();
@@ -72,15 +78,16 @@ namespace MyStack2
         private void Button03_Click(object sender, RoutedEventArgs e)
         {   // [Que(Num)]ボタン押下
 //            WriteLineResult(@"[Que (Number)]");
-            int i, j;
+            int i,j;
 
-            i = buffer.Count;           // 下限要素の取り出し
-            j = buffer[i - 1];
-            buffer.RemoveAt(i - 1);     // 下限要素の削除
+//            i = buffer.Count;           // 下限要素の取り出し
+//            j = buffer[i - 1];
+//            buffer.RemoveAt(i - 1);     // 下限要素の削除
 
             i = int.Parse(TextBox01.Text);
-            buffer.Insert(0, i);            // 上限の要素設定
-
+//            buffer.Insert(0, i);            // 上限の要素設定
+			j = Stack.Que(i);
+			
             WriteLineResult("Que Result : [{0}]", j);
 
             StackView();
@@ -90,8 +97,9 @@ namespace MyStack2
         #region ［Ｃｌｅａｒ（Ｎｕｍｂｅｒ）］ボタン押下
         private void Button04_Click(object sender, RoutedEventArgs e)
         {   // [Clear(Num)]ボタン押下
-            WriteLineResult(@"[Clear (Number)]");
-            buffer.Clear();
+//            WriteLineResult(@"[Clear (Number)]");
+//            buffer.Clear();
+			Stack.Clear();
 
             StackView();
         }
@@ -104,7 +112,8 @@ namespace MyStack2
             int i, j;
 
             i = int.Parse(TextBox01.Text);
-            j = buffer.IndexOf(i);            // 上限の要素設定
+//            j = buffer.IndexOf(i);            // 上限の要素設定
+			j = Stack.chknum(i);
 
             WriteLineResult(" Source : [{0}]", i);
             WriteLineResult(" Result : [{0}]", j);
@@ -115,7 +124,8 @@ namespace MyStack2
         private void Button11_Click(object sender, RoutedEventArgs e)
         {   // [Push(Str)]ボタン押下
 //            WriteLineResult(@"[Push (String)]");
-            strbuf.Insert(0, TextBox01.Text);            // 要素設定
+//            strbuf.Insert(0, TextBox01.Text);            // 要素設定
+			Stack.SPush(TextBox01.Text);
 
             StackSView();
 
@@ -128,8 +138,9 @@ namespace MyStack2
 //            WriteLineResult(@"[Pop (String)]");
             string word;
 
-            word = strbuf[0];              // 要素取り出し
-            strbuf.RemoveAt(0);         // 要素情報削除
+//            word = strbuf[0];              // 要素取り出し
+//            strbuf.RemoveAt(0);         // 要素情報削除
+			word = Stack.SPop();
             WriteLineResult("Pop Result : [{0}]", word);
 
             StackSView();
@@ -141,14 +152,15 @@ namespace MyStack2
         private void Button13_Click(object sender, RoutedEventArgs e)
         {   // [Que(Str)]ボタン押下
 //            WriteLineResult(@"[Que (String)]");
-			int i;
+//			int i;
             string word;
 
-            i = strbuf.Count;           // 下限要素の取り出し
-            word = strbuf[i - 1];
-            strbuf.RemoveAt(i - 1);     // 下限要素の削除
+//            i = strbuf.Count;           // 下限要素の取り出し
+//            word = strbuf[i - 1];
+//            strbuf.RemoveAt(i - 1);     // 下限要素の削除
 
-            strbuf.Insert(0, TextBox01.Text);            // 上限の要素設定
+//            strbuf.Insert(0, TextBox01.Text);            // 上限の要素設定
+			word = Stack.SQue(TextBox01.Text);
 
             WriteLineResult("Que Result : [{0}]", word);
 
@@ -161,7 +173,8 @@ namespace MyStack2
         private void Button14_Click(object sender, RoutedEventArgs e)
         {   // [Clear(Str)]ボタン押下
 //            WriteLineResult(@"[Clear (String)]");
-            strbuf.Clear();
+//            strbuf.Clear();
+            Stack.sclear();
 
             StackSView();
 
@@ -173,12 +186,13 @@ namespace MyStack2
         {   // [Check(Str)]ボタン押下
 //            WriteLineResult(@"[Check (String)]");
             int i;
-			string word;
+//			string word;
 
-			word = TextBox01.Text;
-            i = strbuf.IndexOf(word);            // 要素検索
+//			word = TextBox01.Text;
+//            i = strbuf.IndexOf(word);            // 要素検索
+			i = Stack.chkstr(TextBox01.Text);
 
-            WriteLineResult(" Source : [{0}]", word);
+            WriteLineResult(" Source : [{0}]", TextBox01.Text);
             WriteLineResult(" Result : [{0}]", i);
 
         }
@@ -197,24 +211,28 @@ namespace MyStack2
         #region Stack View
         private void StackView()
         {
+			int _Count;
+
             ListBox01.Items.Clear();
-            foreach (int j in buffer)
+			_Count = Stack.Count();
+            for(int j=0; j<_Count; j++)
             {
-                ListBox01.Items.Add(j);
+                ListBox01.Items.Add(Stack.View(j));
             }
         }
 
 		private void StackSView()
         {
-            ListBox01.Items.Clear();
-            foreach (string j in strbuf)
+ 			int _Count;
+
+			ListBox01.Items.Clear();
+			_Count = Stack.SCount();
+            for(int j=0; j<_Count; j++)
             {
-                ListBox01.Items.Add(j);
+                ListBox01.Items.Add(Stack.SView(j));
             }
 		}
-
         #endregion
-
 
     }
 }

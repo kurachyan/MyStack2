@@ -137,6 +137,9 @@
     <Reference Include="LRSkip">
       <HintPath>.\LRSkip.dll</HintPath>
     </Reference>
+    <Reference Include="Stack">
+      <HintPath>..\Stack\obj\Debug\Stack.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

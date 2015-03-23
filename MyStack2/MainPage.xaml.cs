@@ -23,7 +23,8 @@ namespace MyStack2
     public sealed partial class MainPage : Page
     {
         #region 共有領域
-        private List<int> buffer;
+        private List<int> buffer;		// 数値用
+		private List<string> strbuf;	// 文字列用
         #endregion
 
         #region コンストラクタ
@@ -34,7 +35,9 @@ namespace MyStack2
             // 初期表示をクリアする
             ClearResultTextBox();
 
+			// 共有領域を初期化する
             buffer = new List<int>();
+			strbuf = new List<string>();
         }
         #endregion
 
@@ -111,7 +114,10 @@ namespace MyStack2
         #region ［Ｐｕｓｈ（Ｓｔｒｉｎｇ）］ボタン押下
         private void Button11_Click(object sender, RoutedEventArgs e)
         {   // [Push(Str)]ボタン押下
-            WriteLineResult(@"[Push (String)]");
+//            WriteLineResult(@"[Push (String)]");
+            strbuf.Insert(0, TextBox01.Text);            // 要素設定
+
+            StackSView();
 
         }
         #endregion
@@ -119,7 +125,14 @@ namespace MyStack2
         #region ［Ｐｏｐ（Ｓｔｒｉｎｇ）］ボタン押下
         private void Button12_Click(object sender, RoutedEventArgs e)
         {   // [Pop(Str)]ボタン押下
-            WriteLineResult(@"[Pop (String)]");
+//            WriteLineResult(@"[Pop (String)]");
+            string word;
+
+            word = strbuf[0];              // 要素取り出し
+            strbuf.RemoveAt(0);         // 要素情報削除
+            WriteLineResult("Pop Result : [{0}]", word);
+
+            StackSView();
 
         }
         #endregion
@@ -127,7 +140,19 @@ namespace MyStack2
         #region ［Ｑｕｅ（Ｓｔｒｉｎｇ）］ボタン押下
         private void Button13_Click(object sender, RoutedEventArgs e)
         {   // [Que(Str)]ボタン押下
-            WriteLineResult(@"[Que (String)]");
+//            WriteLineResult(@"[Que (String)]");
+			int i;
+            string word;
+
+            i = strbuf.Count;           // 下限要素の取り出し
+            word = strbuf[i - 1];
+            strbuf.RemoveAt(i - 1);     // 下限要素の削除
+
+            strbuf.Insert(0, TextBox01.Text);            // 上限の要素設定
+
+            WriteLineResult("Que Result : [{0}]", word);
+
+            StackSView();
 
         }
         #endregion
@@ -135,7 +160,10 @@ namespace MyStack2
         #region ［Ｃｌｅａｒ（Ｓｔｒｉｎｇ）］ボタン押下
         private void Button14_Click(object sender, RoutedEventArgs e)
         {   // [Clear(Str)]ボタン押下
-            WriteLineResult(@"[Clear (String)]");
+//            WriteLineResult(@"[Clear (String)]");
+            strbuf.Clear();
+
+            StackSView();
 
         }
         #endregion
@@ -143,7 +171,15 @@ namespace MyStack2
         #region ［Ｃｈｅｃｋ（Ｓｔｒｉｎｇ）］ボタン押下
         private void Button15_Click(object sender, RoutedEventArgs e)
         {   // [Check(Str)]ボタン押下
-            WriteLineResult(@"[Check (String)]");
+//            WriteLineResult(@"[Check (String)]");
+            int i;
+			string word;
+
+			word = TextBox01.Text;
+            i = strbuf.IndexOf(word);            // 要素検索
+
+            WriteLineResult(" Source : [{0}]", word);
+            WriteLineResult(" Result : [{0}]", i);
 
         }
         #endregion
@@ -167,6 +203,16 @@ namespace MyStack2
                 ListBox01.Items.Add(j);
             }
         }
+
+		private void StackSView()
+        {
+            ListBox01.Items.Clear();
+            foreach (string j in strbuf)
+            {
+                ListBox01.Items.Add(j);
+            }
+		}
+
         #endregion
 
 

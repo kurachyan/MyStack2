@@ -40,10 +40,17 @@ namespace Stack
         {   // 数値情報をスタックから取り出し
             int ret;
 
-            ret = buffer[0];              // 要素取り出し
-            buffer.RemoveAt(0);         // 要素情報削除
+            try
+            {
+                ret = buffer[0];              // 要素取り出し
+                buffer.RemoveAt(0);         // 要素情報削除
 
-            return (ret);
+                return (ret);
+            }
+            catch (ArgumentOutOfRangeException)
+            {   // 空スタックからの情報取り出し
+                throw;                      // 呼び出しへthrow
+            }
         }
 
         public int Que(int Data)
@@ -51,13 +58,21 @@ namespace Stack
             int ret;
             int i;
 
-            i = buffer.Count;           // 下限要素の取り出し
-            ret = buffer[i - 1];
-            buffer.RemoveAt(i - 1);     // 下限要素の削除
+            try
+            {
+                i = buffer.Count;           // 下限要素の取り出し
+                ret = buffer[i - 1];
+                buffer.RemoveAt(i - 1);     // 下限要素の削除
 
-            buffer.Insert(0, Data);            // 上限の要素設定
+                buffer.Insert(0, Data);            // 上限の要素設定
 
-            return (ret);
+                return (ret);
+
+            }
+            catch (ArgumentOutOfRangeException)
+            {   // 空スタックからの情報取り出し
+                throw;                      // 呼び出しへthrow
+            }
         }
 
         public int View(int vpos)
@@ -90,17 +105,27 @@ namespace Stack
             lskip.Exec();
             wbuf = lskip.Wbuf;
 
-            strbuf.Insert(0, wbuf);            // 要素設定
+            if (wbuf != null)
+            {   // 設定情報は有るか？
+                strbuf.Insert(0, wbuf);            // 要素設定
+            }
         }
 
         public String SPop()
         {   // 文字列情報をスタックから取り出し
             String wbuf;
 
-            wbuf = strbuf[0];              // 要素取り出し
-            strbuf.RemoveAt(0);         // 要素情報削除
+            try
+            {
+                wbuf = strbuf[0];              // 要素取り出し
+                strbuf.RemoveAt(0);         // 要素情報削除
 
-            return (wbuf);
+                return (wbuf);
+            }
+            catch (ArgumentOutOfRangeException)
+            {   // 空スタックからの情報取り出し
+                throw;                      // 呼び出しへthrow
+            }
         }
 
         public String SQue(String Sdata)
@@ -115,17 +140,31 @@ namespace Stack
             lskip.Exec();
             wbuf = lskip.Wbuf;
 
-            i = strbuf.Count;           // 下限要素の取り出し
-            ret = strbuf[i - 1];
-            strbuf.RemoveAt(i - 1);     // 下限要素の削除
+            if (wbuf != null)
+            {   // 設定情報は有るか？
+                try
+                {
+                    i = strbuf.Count;           // 下限要素の取り出し
+                    ret = strbuf[i - 1];
+                    strbuf.RemoveAt(i - 1);     // 下限要素の削除
 
-            strbuf.Insert(0, wbuf);            // 上限の要素設定
+                    strbuf.Insert(0, wbuf);            // 上限の要素設定
+                }
+                catch (ArgumentOutOfRangeException)
+                {   // 空スタックからの情報取り出し
+                    throw;                      // 呼び出しへthrow
+                }
+            }
+            else
+            {
+                ret = null;
+            }
 
             return (ret);
         }
 
         public String SView(int vpos)
-        {
+        {   // 指定位置の文字列情報を取り出し
              return (strbuf[vpos]);
         }
 
@@ -157,12 +196,13 @@ namespace Stack
 			dclear();
 			sclear();
         }
-        public void Exec()
-        {   // 構文評価を行う
-        }
+//        public void Exec()
+//        {   // 構文評価を行う
+//        }
         #endregion
 
         #region サブ・モジュール
+//      本版では未使用
         #endregion
 
     }

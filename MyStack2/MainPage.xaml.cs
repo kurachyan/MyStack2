@@ -25,8 +25,6 @@ namespace MyStack2
     public sealed partial class MainPage : Page
     {
         #region 共有領域
-//      private List<int> buffer;		// 数値用
-//		private List<string> strbuf;	// 文字列用
 		private CS_Stack Stack;
         #endregion
 
@@ -49,13 +47,21 @@ namespace MyStack2
         private void Button01_Click(object sender, RoutedEventArgs e)
         {   // [Push(Num)]ボタン押下
 //            WriteLineResult(@"[Push (Number)]");
+
             int i;
 
-            i = int.Parse(TextBox01.Text);
-			Stack.Push(i);
-//            buffer.Insert(0, i);            // 要素設定
+            try
+            {
+                i = int.Parse(TextBox01.Text);
+                Stack.Push(i);
 
-            StackView();
+                StackView();
+            }
+            catch (FormatException)
+            {
+                ClearResultTextBox();
+                WriteLineResult(@"[Push (Number)] : [FormatException]");
+            }
         }
         #endregion
 
@@ -65,12 +71,18 @@ namespace MyStack2
 //            WriteLineResult(@"[Pop (Number)]");
             int i;
 
-//            i = buffer[0];              // 要素取り出し
-//            buffer.RemoveAt(0);         // 要素情報削除
-			i = Stack.Pop();
-            WriteLineResult("Pop Result : [{0}]", i);
+            try
+            {
+                i = Stack.Pop();
+                WriteLineResult("Pop Result : [{0}]", i);
 
-            StackView();
+                StackView();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                ClearResultTextBox();
+                WriteLineResult(@"[Pop (Number)] : [ArgumentOutOfRangeException]");
+            }
         }
         #endregion
 
@@ -80,17 +92,21 @@ namespace MyStack2
 //            WriteLineResult(@"[Que (Number)]");
             int i,j;
 
-//            i = buffer.Count;           // 下限要素の取り出し
-//            j = buffer[i - 1];
-//            buffer.RemoveAt(i - 1);     // 下限要素の削除
+            try
+            {
+                i = int.Parse(TextBox01.Text);
+                j = Stack.Que(i);
 
-            i = int.Parse(TextBox01.Text);
-//            buffer.Insert(0, i);            // 上限の要素設定
-			j = Stack.Que(i);
-			
-            WriteLineResult("Que Result : [{0}]", j);
+                WriteLineResult("Que Result : [{0}]", j);
 
-            StackView();
+                StackView();
+
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                ClearResultTextBox();
+                WriteLineResult(@"[Que (Number)] : [ArgumentOutOfRangeException]");
+            }
         }
         #endregion
 
@@ -98,7 +114,6 @@ namespace MyStack2
         private void Button04_Click(object sender, RoutedEventArgs e)
         {   // [Clear(Num)]ボタン押下
 //            WriteLineResult(@"[Clear (Number)]");
-//            buffer.Clear();
 			Stack.Clear();
 
             StackView();
@@ -111,12 +126,20 @@ namespace MyStack2
 //            WriteLineResult(@"[Check (Number)]");
             int i, j;
 
-            i = int.Parse(TextBox01.Text);
-//            j = buffer.IndexOf(i);            // 上限の要素設定
-			j = Stack.chknum(i);
+            try
+            {
+                i = int.Parse(TextBox01.Text);
+                j = Stack.chknum(i);
 
-            WriteLineResult(" Source : [{0}]", i);
-            WriteLineResult(" Result : [{0}]", j);
+                WriteLineResult(" Source : [{0}]", i);
+                WriteLineResult(" Result : [{0}]", j);
+
+            }
+            catch (FormatException)
+            {
+                ClearResultTextBox();
+                WriteLineResult(@"[Check (Number)] : [FormatException]");
+            }
         }
         #endregion
 
@@ -124,7 +147,6 @@ namespace MyStack2
         private void Button11_Click(object sender, RoutedEventArgs e)
         {   // [Push(Str)]ボタン押下
 //            WriteLineResult(@"[Push (String)]");
-//            strbuf.Insert(0, TextBox01.Text);            // 要素設定
 			Stack.SPush(TextBox01.Text);
 
             StackSView();
@@ -138,12 +160,18 @@ namespace MyStack2
 //            WriteLineResult(@"[Pop (String)]");
             string word;
 
-//            word = strbuf[0];              // 要素取り出し
-//            strbuf.RemoveAt(0);         // 要素情報削除
-			word = Stack.SPop();
-            WriteLineResult("Pop Result : [{0}]", word);
+            try
+            {
+                word = Stack.SPop();
+                WriteLineResult("Pop Result : [{0}]", word);
 
-            StackSView();
+                StackSView();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                ClearResultTextBox();
+                WriteLineResult(@"[Pop (String)] : [ArgumentOutOfRangeException]");
+            }
 
         }
         #endregion
@@ -152,20 +180,21 @@ namespace MyStack2
         private void Button13_Click(object sender, RoutedEventArgs e)
         {   // [Que(Str)]ボタン押下
 //            WriteLineResult(@"[Que (String)]");
-//			int i;
             string word;
 
-//            i = strbuf.Count;           // 下限要素の取り出し
-//            word = strbuf[i - 1];
-//            strbuf.RemoveAt(i - 1);     // 下限要素の削除
+            try
+            {
+                word = Stack.SQue(TextBox01.Text);
 
-//            strbuf.Insert(0, TextBox01.Text);            // 上限の要素設定
-			word = Stack.SQue(TextBox01.Text);
+                WriteLineResult("Que Result : [{0}]", word);
 
-            WriteLineResult("Que Result : [{0}]", word);
-
-            StackSView();
-
+                StackSView();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                ClearResultTextBox();
+                WriteLineResult(@"[Que (String)] : [ArgumentOutOfRangeException]");
+            }
         }
         #endregion
 
@@ -173,11 +202,9 @@ namespace MyStack2
         private void Button14_Click(object sender, RoutedEventArgs e)
         {   // [Clear(Str)]ボタン押下
 //            WriteLineResult(@"[Clear (String)]");
-//            strbuf.Clear();
             Stack.sclear();
 
             StackSView();
-
         }
         #endregion
 
@@ -186,15 +213,11 @@ namespace MyStack2
         {   // [Check(Str)]ボタン押下
 //            WriteLineResult(@"[Check (String)]");
             int i;
-//			string word;
 
-//			word = TextBox01.Text;
-//            i = strbuf.IndexOf(word);            // 要素検索
 			i = Stack.chkstr(TextBox01.Text);
 
             WriteLineResult(" Source : [{0}]", TextBox01.Text);
             WriteLineResult(" Result : [{0}]", i);
-
         }
         #endregion
 
@@ -202,9 +225,6 @@ namespace MyStack2
         private void Button20_Click(object sender, RoutedEventArgs e)
         {   // [Reset]ボタン押下
             ClearResultTextBox();
-
-//            TextBox02.Text = "";
-
         }
         #endregion
 
@@ -215,9 +235,12 @@ namespace MyStack2
 
             ListBox01.Items.Clear();
 			_Count = Stack.Count();
-            for(int j=0; j<_Count; j++)
-            {
-                ListBox01.Items.Add(Stack.View(j));
+            if (_Count != 0)
+            {   // 登録情報は有るか？
+                for (int j = 0; j < _Count; j++)
+                {
+                    ListBox01.Items.Add(Stack.View(j));
+                }
             }
         }
 
@@ -227,9 +250,12 @@ namespace MyStack2
 
 			ListBox01.Items.Clear();
 			_Count = Stack.SCount();
-            for(int j=0; j<_Count; j++)
-            {
-                ListBox01.Items.Add(Stack.SView(j));
+            if (_Count != 0)
+            {   // 登録情報は有るか？
+                for (int j = 0; j < _Count; j++)
+                {
+                    ListBox01.Items.Add(Stack.SView(j));
+                }
             }
 		}
         #endregion
